@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { blogPosts } from "@/blogPosts/blogPosts";
+import { blogPosts } from "@/blog_posts/blogPosts";
 
 type BlogCardProps = {
   title: string;
