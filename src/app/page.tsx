@@ -1,64 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const blog_posts = [
-  {
-    id: 1,
-    title: "My University Journey",
-    slug: "my-university-journey",
-    thumbnail_image: "graduation-caps-thrown-in-air.jpg",
-  },
-  {
-    id: 2,
-    title: "My University Journey",
-    slug: "my-university-journey",
-    thumbnail_image: "graduation-caps-thrown-in-air.jpg",
-  },
-  {
-    id: 3,
-    title: "My University Journey",
-    slug: "my-university-journey",
-    thumbnail_image: "graduation-caps-thrown-in-air.jpg",
-  },
-  {
-    id: 4,
-    title: "My University Journey",
-    slug: "my-university-journey",
-    thumbnail_image: "graduation-caps-thrown-in-air.jpg",
-  },
-  {
-    id: 5,
-    title: "My University Journey",
-    slug: "my-university-journey",
-    thumbnail_image: "graduation-caps-thrown-in-air.jpg",
-  },
-  {
-    id: 6,
-    title: "My University Journey",
-    slug: "my-university-journey",
-    thumbnail_image: "graduation-caps-thrown-in-air.jpg",
-  },
-  {
-    id: 7,
-    title: "My University Journey",
-    slug: "my-university-journey",
-    thumbnail_image: "graduation-caps-thrown-in-air.jpg",
-  },
-  {
-    id: 8,
-    title: "My University Journey",
-    slug: "my-university-journey",
-    thumbnail_image: "graduation-caps-thrown-in-air.jpg",
-  },
-];
+import { blogPosts } from "@/blogPosts/blogPosts";
 
 type BlogCardProps = {
   title: string;
   slug: string;
-  thumbnail_image: string;
+  thumbnailImage: string;
 };
 
-const BlogCard = ({ title, slug, thumbnail_image }: BlogCardProps) => {
+const BlogCard = ({ title, slug, thumbnailImage }: BlogCardProps) => {
   return (
     <Link className="p-5 " href={`/blog/v1/${slug}`}>
       <div className="relative w-[256px] h-48 ">
@@ -67,11 +18,9 @@ const BlogCard = ({ title, slug, thumbnail_image }: BlogCardProps) => {
         </h1>
         <div className="relative w-full h-full z-0  ">
           <Image
-            className="rounded-2xl"
-            src={`/blog_images/${thumbnail_image}`}
+            className="rounded-2xl object-fit object-center"
+            src={`/blogImages/${thumbnailImage}`}
             fill={true}
-            objectFit="cover"
-            objectPosition="center"
             alt={title}
           />
         </div>
@@ -84,13 +33,13 @@ export default function Home() {
   return (
     <main className="flex justify-center">
       <div className="grid grid-flow-row-dense grid-cols-3 max-w-5xl content-center">
-        {blog_posts.map((card) => {
+        {blogPosts.map((post, index) => {
           return (
             <BlogCard
-              key={card.id}
-              title={card.title}
-              slug={card.slug}
-              thumbnail_image={card.thumbnail_image}
+              key={index}
+              title={post.title}
+              slug={post.slug}
+              thumbnailImage={post.thumbnailImage}
             />
           );
         })}
