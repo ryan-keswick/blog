@@ -1,50 +1,82 @@
 "use client";
-
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { ReactElement, ReactNode, useState } from "react";
 
-interface ImageData {
-  path: string;
+interface CarouselItemProps {
+  src: string;
   alt: string;
-  bottomText: String;
+  description: string;
 }
 
-interface CarouselProps {
-  images: ImageData[];
-}
-
-export const CarouselItem = ({ children, width }) => {
+export const CarouselItem = ({ src, alt, description }: CarouselItemProps) => {
   return (
-    <div
-      className="inline-flex items-center justify-center h-[200px] bg-green-500"
-      style={{ width: width }}
-    >
-      {children}
+    <div className="inline-flex flex-col relative h-[330px] md:h-[430px] w-full">
+      <div className="inline-flex relative h-[300px] sm:h-[300px] md:h-[400px]">
+        <Image className="object-contain" fill={true} src={src} alt={alt} />
+      </div>
+      <div className="absolute bottom-0 flex w-full justify-center">
+        <h1>{description}</h1>
+      </div>
     </div>
   );
 };
 
+interface CarouselProps {
+  children: React.ReactElement[] | React.ReactElement;
+}
+
 export const Carousel = ({ children }: CarouselProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [startX, setStartX] = useState(0);
+  const [endX, setEndX] = useState(0);
+  const [startActiveIndex, setStartActiveIndex] = useState(0);
+  const [transitionDuration, setTransitionDuration] = useState("0ms");
+
+  const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    setTransitionDuration("0ms"); // instant
+    setStartX(event.touches[0].clientX); // Get Starting X Coordinate
+    setStartActiveIndex(activeIndex);
+  };
+
+  const handleTouchMove = (event: React.TouchEvent<HTMLDivElement>) => {
+    let x = event.touches[0].clientX;
+    setEndX(event.touches[0].clientX);
+    setActiveIndex(startActiveIndex + (startX - x) / window.screen.width);
+  };
+
+  const handleTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
+    if (startX < endX) {
+      updateIndex(activeIndex - 1);
+    } else if (startX > endX) {
+      updateIndex(activeIndex + 1);
+    }
+  };
 
   const updateIndex = (newIndex: number) => {
+    setTransitionDuration("500ms"); // slower transition
     if (newIndex < 0) {
       newIndex = 0;
     } else if (newIndex >= React.Children.count(children)) {
       newIndex = React.Children.count(children) - 1;
     }
 
-    setActiveIndex(newIndex);
+    setActiveIndex(Math.round(newIndex));
   };
 
   return (
     <div className="overflow-hidden">
       <div
-        className="whitespace-nowrap ease-in-out transition-all duration-[1000ms]"
-        style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        className="whitespace-nowrap ease-in-out transition-all"
+        style={{
+          transform: `translateX(-${activeIndex * 100}%)`,
+          transitionDuration: `${transitionDuration}`,
+        }}
       >
-        {React.Children.map(children, (child, index) => {
-          return React.cloneElement(child, { width: "100%" });
+        {React.Children.map(children, (child: ReactElement) => {
+          return React.cloneElement(child);
         })}
       </div>
 
@@ -55,21 +87,6 @@ export const Carousel = ({ children }: CarouselProps) => {
         <button onClick={() => updateIndex(activeIndex + 1)}>next</button>
       </div>
     </div>
-
-    //     <div className="w-full h-full relative overflow-x-visible">
-    //       <Image
-    //         className="object-contain rounded-lg"
-    //         src={`/${images[0].path}`}
-    //         fill={true}
-    //         alt={images[0].alt}
-    //       />
-    //       <Image
-    //         className="object-contain rounded-lg"
-    //         src={`/${images[1].path}`}
-    //         fill={true}
-    //         alt={images[1].alt}
-    //       />
-    //     </div>
   );
 };
 
