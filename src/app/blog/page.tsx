@@ -19,7 +19,7 @@ const BlogCard = ({ title, slug, thumbnailImage }: BlogCardProps) => {
         <div className="relative w-full h-full z-0  ">
           <Image
             className="rounded-2xl object-fit object-center"
-            src={`/blogImages/${thumbnailImage}`}
+            src={`/blog-images/${thumbnailImage}`}
             fill={true}
             alt={title}
           />

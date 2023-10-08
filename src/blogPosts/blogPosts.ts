@@ -11,6 +11,6 @@ export const blogPosts: BlogPost[] = [
     id: 0,
     title: "My University Journey",
     thumbnailImage: "graduation-caps-thrown-in-air.jpg",
-    slug: "university",
+    slug: "8kt6ayhw6h",
   },
 ];

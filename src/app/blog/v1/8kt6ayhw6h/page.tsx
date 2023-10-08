@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 
 import Carousel, { CarouselItem } from "@/components/Carousel/Carousel";
 
@@ -37,23 +36,36 @@ export default function Page() {
               <h1> Source Code (GitHub)</h1>
             </a>
           </div>
-          <Carousel>
-            <CarouselItem
-              src={`/blog-images/university/wctd-hack-2016-presenting.jpg`}
-              description={"I'm the 2nd person from the right"}
-              alt={"The team pitching the website with a demo to an audience"}
-            />
-            <CarouselItem
-              src={`/blog-images/university/wctd-hack-2016-crunch.jpg`}
-              alt={"Two students making last minute changes"}
-              description={"Making last minute changes"}
-            />
-            <CarouselItem
-              src={`/blog-images/university/wctd-hack-2016-winners.jpg`}
-              alt={"Winning"}
-              description={"The Team with the coordinator"}
-            />
-          </Carousel>
+          <div className="my-1 sm:my-10">
+            <Carousel>
+              <CarouselItem
+                src={`/blog-images/wctd-hack-2016-presenting.jpg`}
+                description={"I'm the 2nd person from the right"}
+                alt={"The team pitching the website with a demo to an audience"}
+              />
+              <CarouselItem
+                src={`/blog-images/wctd-hack-2016-crunch.jpg`}
+                alt={"Two students making last minute changes"}
+                description={"Making last minute changes"}
+              />
+              <CarouselItem
+                src={`/blog-images/wctd-hack-2016-winners.jpg`}
+                alt={"Winning"}
+                description={"The Team with the coordinator"}
+              />
+            </Carousel>
+          </div>
+          <p>
+            Winning a Microsoft Surface was nice, but what I actually won was
+            the realization that I enjoyed the coding {'"loop"'}. I would come
+            up with an idea on how a program should run, wether it be a React
+            App or Page Rank algorithm. I would write some bad code, a couple
+            google searches later it would turn into slightly better code and
+            the cycle would continue for many hours. This is the most important
+            trait a programmer should have, not only persevering when a software
+            bug shows up, but enjoying the process of solving the problem, no
+            matter how long it takes.
+          </p>
         </div>
       </div>
     </main>
