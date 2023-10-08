@@ -15,7 +15,7 @@ export const CarouselItem = ({ src, alt, description }: CarouselItemProps) => {
         <Image className="object-contain" fill={true} src={src} alt={alt} />
       </div>
       <div className="absolute bottom-0 flex w-full justify-center">
-        <h1>{description}</h1>
+        <p>{description}</p>
       </div>
     </div>
   );
