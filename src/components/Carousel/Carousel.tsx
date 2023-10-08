@@ -64,7 +64,7 @@ export const Carousel = ({ children }: CarouselProps) => {
   };
 
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden relative">
       <div
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
@@ -80,11 +80,26 @@ export const Carousel = ({ children }: CarouselProps) => {
         })}
       </div>
 
-      <div>
-        <button onClick={() => updateIndex(activeIndex - 1)}>prev</button>
+      {/* Left/Right Buttons */}
+      <div className="flex flex-col absolute inset-y-0 left-0 justify-center">
+        {activeIndex > 0 && (
+          <button
+            className="w-10 h-10 border-2 rounded-full hover:bg-white hover:text-black"
+            onClick={() => updateIndex(activeIndex - 1)}
+          >
+            ❮
+          </button>
+        )}
       </div>
-      <div>
-        <button onClick={() => updateIndex(activeIndex + 1)}>next</button>
+      <div className="flex flex-col absolute inset-y-0 right-0 justify-center">
+        {activeIndex < React.Children.count(children) - 1 && (
+          <button
+            className="w-10 h-10 border-2 rounded-full hover:bg-white hover:text-black"
+            onClick={() => updateIndex(activeIndex + 1)}
+          >
+            ❯
+          </button>
+        )}
       </div>
     </div>
   );
