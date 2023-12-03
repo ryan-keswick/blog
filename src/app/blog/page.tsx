@@ -11,21 +11,23 @@ type BlogCardProps = {
 
 const BlogCard = ({ title, slug, thumbnailImage }: BlogCardProps) => {
   return (
-    <Link className="p-5 " href={`/blog/v1/${slug}`}>
-      <div className="relative w-[256px] h-48 ">
-        <h1 className="absolute inset-y-1/3 left-2 z-10 w-full h-full/2 ">
-          {title}
-        </h1>
-        <div className="relative w-full h-full z-0  ">
-          <Image
-            className="rounded-2xl object-fit object-center"
-            src={`/blog-images/${thumbnailImage}`}
-            fill={true}
-            alt={title}
-          />
+    <div className="p-5 ">
+      <Link href={`/blog/v1/${slug}`}>
+        <div className="relative w-[256px] h-48 border border-slate-800 hover:border-slate-300 rounded-2xl">
+          <h1 className="absolute inset-y-1/3 left-2 z-10 w-full h-full/2 ">
+            {title}
+          </h1>
+          <div className="relative w-full h-full z-0">
+            <Image
+              className="rounded-2xl object-fit object-center "
+              src={`/blog-images/${thumbnailImage}`}
+              fill={true}
+              alt={title}
+            />
+          </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 };
 
