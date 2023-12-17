@@ -13,19 +13,56 @@ export default function Page() {
           </h1>
         </header>
         <div className="flex flex-col gap-4 px-2 sm:px-4 md:px-6 lg:px-8 xl:px-10">
-          <SubHeading subHeading="Assumptions" />
+          <SubHeading subHeading="Goals" />
           <p>
-            - {"You're"} using a postgres database named {'"backend"'} in the
-            {'"public"'} schema. <br />- Already have a valid Fivetran sync with
-            the backend database and the a snowflake database
+            This guide will walk you through setting up a Snowflake data
+            warehouse, connecting it to Fivetran, and using Cloud dbt to
+            transform your data.
+          </p>
+          <p>
+            {"It's"} best practice to logically separate your different
+            environments. For example, if {"you're"} deploying a SaaS product to
+            serve different regions, you would use seperate AWS accounts for
+            each region or environment. In this guide, {"we'll"} use separate
+            Snowflake accounts for each environment (dev, prod). A dbt project
+            has the ability to deploy to different environments. This feature is
+            supported well.
+          </p>
+          <p>
+            Developers will prototype and test in the dev environment. When they
+            are ready to deploy to production, they will merge their changes
+            into the main branch. This will trigger a CI/CD pipeline to deploy
+            the changes to the production environment.
+          </p>
+          <SubHeading subHeading="Setting Up Fivetran" />
+          <p>
+            Fivetran is easily the *fastest* way to get your postgres data into
+            Snowflake. I may not be the cheapest, but it is the easiest. I would
+            recommend just starting with Fivetran and if the pricing is really
+            killing you. You can always switch to a cheaper solution later.
+          </p>
+          <p>
+            The Fivetran docs are pretty good. I would recommend just following
+            them. Name you destination in Snowflake something like `RAW`.
           </p>
 
-          <p>The best way to setup this</p>
-
+          <SubHeading subHeading="Setting Up Snowflake" />
           <p>
-            A developer will develop in the dbt Cloud dbt IDE and when do
-            iterating on the dbt model (SQL). A new schema with the developers
-            name prefixed by DBT will appear in the target Snowflake database.
+            Snowflake is a cloud data warehouse. It is a fully managed service
+            that allows you to scale your compute warehouse up and down to zero
+            as needed. It has a lot of great features that make it a great
+            choice for a data warehouse. It is also well supported by dbt.
+          </p>
+          <p>
+            Use my terraform module to architect your Snowflake account. It will
+            create the following resources:
+            <ul>
+              <li>- Databases</li>
+              <li>- Warehouses</li>
+              <li>- Roles</li>
+              <li>- Users</li>
+              <li>- Shares</li>
+            </ul>
           </p>
         </div>
       </div>
