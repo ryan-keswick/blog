@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-import Carousel, { CarouselItem } from "@/components/Carousel/Carousel";
-import SubHeading from "@/components/SubHeading/SubHeading";
+import Carousel, { CarouselItem } from "@/components/Carousel";
+import SubHeading from "@/components/SubHeading";
 
 export default function Page() {
   return (
